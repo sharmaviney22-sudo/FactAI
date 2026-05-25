@@ -3,7 +3,7 @@
 An AI-powered **Fact-Checking Web App** that automatically verifies claims in PDF documents using Groq's Llama 3.3 70B model.
 
 ## 🚀 Live Demo
-https://factguard-ai-2etssbphxqcr2ppfxjitnd.streamlit.app/
+https://factai-erk7dd7okxcaa2bgowtre4.streamlit.app/
 
 ## ✨ Features
 - 📄 Upload any PDF document
@@ -24,7 +24,7 @@ https://factguard-ai-2etssbphxqcr2ppfxjitnd.streamlit.app/
 ## 📦 Installation (Local)
 
 ```bash
-git clone https://github.com/Yash8439/factguard-ai
+git clone https://github.com/sharmaviney22-sudo/FactAI
 cd factguard-ai
 pip install -r requirements.txt
 streamlit run app.py
@@ -135,8 +135,8 @@ Yash
 Product Management Trainee Candidate
 Cog Culture Assessment
 
-https://github.com/Yash8439/factguard-ai/edit/main/README.md
-https://www.linkedin.com/in/yash-rastogi-80a84b28b/
+https://github.com/sharmaviney22-sudo/FactAI/blob/main/README.md
+https://www.linkedin.com/in/viney-sharma-b2120932b/
 
 📄 License
 MIT License - Free for educational and evaluation purposes.
