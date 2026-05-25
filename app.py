@@ -7,8 +7,8 @@ import os
 
 # ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="FactGuard AI",
-    page_icon="🔍",
+    page_title="FactGuard AI - Precision Fact Checking",
+    page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -16,183 +16,390 @@ st.set_page_config(
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html, body, [data-testid="stAppViewContainer"] {
-    background: #0a0a0f;
-    color: #e8e8f0;
-    font-family: 'Syne', sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 [data-testid="stAppViewContainer"] {
-    background: radial-gradient(ellipse at 20% 20%, #1a0a2e 0%, #0a0a0f 50%),
-                radial-gradient(ellipse at 80% 80%, #0a1a2e 0%, transparent 50%);
-    min-height: 100vh;
+    background: #0f0f1a;
+    background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
 }
 
-[data-testid="stHeader"] { background: transparent !important; }
+[data-testid="stHeader"] {
+    background: rgba(15, 15, 26, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+}
 
-.main-title {
-    font-family: 'Syne', sans-serif;
+/* Main container */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Navigation */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 2rem;
+}
+
+.logo-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
     font-weight: 800;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    letter-spacing: -2px;
-    background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #34d399 100%);
+    background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.1;
-    margin-bottom: 0.3rem;
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.nav-links span {
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.nav-links span:hover {
+    color: #38bdf8;
+}
+
+/* Hero section */
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem 4rem;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.05) 0%, rgba(192, 132, 252, 0.05) 100%);
+    border-radius: 24px;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.main-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    color: #94a3b8;
+    margin-bottom: 0.5rem;
 }
 
 .subtitle {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
-    color: #6b7280;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 2.5rem;
+    color: #64748b;
+    letter-spacing: 1px;
 }
 
-.hero-section {
+/* Upload area */
+.upload-area {
+    background: rgba(30, 41, 59, 0.5);
+    border: 2px dashed rgba(56, 189, 248, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
     text-align: center;
-    padding: 3rem 1rem 2rem;
-    border-bottom: 1px solid rgba(167, 139, 250, 0.15);
-    margin-bottom: 2.5rem;
+    transition: all 0.3s;
+    margin-bottom: 2rem;
 }
 
-.card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 1.5rem;
+.upload-area:hover {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.05);
+}
+
+.upload-icon {
+    font-size: 3rem;
     margin-bottom: 1rem;
+}
+
+/* Button styling */
+.analyze-btn {
+    background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
     position: relative;
     overflow: hidden;
 }
 
-.card::before {
+.analyze-btn::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
 }
 
-.card-verified::before  { background: linear-gradient(90deg, #34d399, #059669); }
-.card-inaccurate::before { background: linear-gradient(90deg, #fbbf24, #d97706); }
-.card-false::before      { background: linear-gradient(90deg, #f87171, #dc2626); }
-
-.badge {
-    display: inline-block;
-    padding: 0.2rem 0.8rem;
-    border-radius: 999px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
+.analyze-btn:hover::before {
+    left: 100%;
 }
 
-.badge-verified   { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
-.badge-inaccurate { background: rgba(251,191,36,0.15);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
-.badge-false      { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
-
-.claim-text {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #e8e8f0;
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
+.analyze-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
 }
 
-.explanation {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
-    color: #9ca3af;
-    line-height: 1.6;
+/* Stats grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.stat-box {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 1.2rem;
+.stat-card {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    border-radius: 16px;
+    padding: 1.5rem;
     text-align: center;
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 .stat-number {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
+    font-family: 'Inter', sans-serif;
     font-size: 2.5rem;
-    line-height: 1;
-    margin-bottom: 0.3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
 }
 
 .stat-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: #6b7280;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #94a3b8;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    font-weight: 500;
 }
 
-.section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+/* Results section */
+.results-section {
+    margin-top: 2rem;
 }
 
-div.stButton > button {
-    width: 100%;
-    background: linear-gradient(135deg, #7c3aed, #2563eb);
-    color: white;
-    border: none;
-    padding: 0.85rem 2rem;
-    border-radius: 10px;
-    font-family: 'Syne', sans-serif;
+.section-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
     font-weight: 700;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-div.stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6);
+.section-header::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    border-radius: 2px;
 }
 
-.footer-text {
-    font-family: 'Space Mono', monospace;
+/* Claim cards */
+.claim-card {
+    background: rgba(30, 41, 59, 0.4);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid;
+    transition: all 0.3s;
+}
+
+.claim-card:hover {
+    transform: translateX(5px);
+    background: rgba(30, 41, 59, 0.6);
+}
+
+.claim-card.verified {
+    border-left-color: #10b981;
+}
+
+.claim-card.inaccurate {
+    border-left-color: #f59e0b;
+}
+
+.claim-card.false {
+    border-left-color: #ef4444;
+}
+
+.claim-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.claim-badge {
     font-size: 0.7rem;
-    color: #374151;
-    text-align: center;
-    padding: 2rem 0 1rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.badge-verified {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-inaccurate {
+    background: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-false {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.claim-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #f1f5f9;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.claim-explanation {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+/* Loading animation */
+.loading-wrapper {
+    text-align: center;
+    padding: 3rem;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(56, 189, 248, 0.2);
+    border-top-color: #38bdf8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Footer */
+.footer {
+    margin-top: 4rem;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(56, 189, 248, 0.1);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .nav-links {
+        display: none;
+    }
+}
+
+/* Custom file uploader */
+[data-testid="stFileUploader"] {
+    background: transparent;
+}
+
+[data-testid="stFileUploader"] > div:first-child {
+    background: transparent;
+}
+
+/* Success message */
+.success-message {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    color: #10b981;
+    font-size: 0.9rem;
+    margin-top: 1rem;
 }
 </style>
 """, unsafe_allow_html=True)
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+# ── Helpers (same as before) ───────────────────────────────────────────────────
 
 def extract_text_from_pdf(uploaded_file) -> str:
     data = uploaded_file.read()
     doc = fitz.open(stream=data, filetype="pdf")
     return "\n".join(page.get_text() for page in doc)
 
-
 def analyze_claims(text: str, api_key: str) -> list:
-    """Groq API se fact-checking with robust error handling"""
     client = Groq(api_key=api_key)
     
     prompt = f"""You are an expert fact-checker AI. Analyze the following document text and:
@@ -218,11 +425,6 @@ Return a JSON array of objects. Each object must have EXACTLY these keys:
 
 Extract at least 5 claims. Return ONLY valid JSON. No markdown, no preamble.
 
-Example response:
-[
-  {{"claim": "Example claim", "status": "Verified", "explanation": "This is correct because..."}}
-]
-
 Document text:
 \"\"\"
 {text[:6000]}
@@ -241,16 +443,12 @@ Document text:
         )
         
         raw = response.choices[0].message.content.strip()
-        
-        # Clean markdown
         raw = re.sub(r"^```json\s*", "", raw)
         raw = re.sub(r"```$", "", raw)
         raw = re.sub(r"^```\s*", "", raw)
         
-        # Parse JSON
         data = json.loads(raw)
         
-        # Handle different response formats
         if isinstance(data, dict):
             if "claims" in data:
                 claims_data = data["claims"]
@@ -267,7 +465,6 @@ Document text:
         else:
             claims_data = []
         
-        # Validate each claim
         validated = []
         for claim in claims_data:
             if isinstance(claim, dict) and all(k in claim for k in ["claim", "status", "explanation"]):
@@ -280,17 +477,14 @@ Document text:
         return []
 
 
-# ── UI ────────────────────────────────────────────────────────────────────────
+# ── UI Implementation ────────────────────────────────────────────────────────
 
-# ✅ FIX: API key automatically read from secrets (user ko nahi mangni)
+# Get API key
 try:
-    # Try to get API key from Streamlit secrets (production)
     api_key = st.secrets["GROQ_API_KEY"]
 except:
-    # Fallback for local development (optional)
     api_key = os.environ.get("GROQ_API_KEY", "")
     
-    # If still no key, show setup instructions (not ask user)
     if not api_key:
         st.error("""
         ⚠️ **API Key Missing**
@@ -303,88 +497,162 @@ except:
         """)
         st.stop()
 
+# UI Layout
 st.markdown("""
-<div class="hero-section">
-    <div class="main-title">FactGuard AI</div>
-    <div class="subtitle">✦ Automated Claim Verification Engine ✦</div>
+<div class="main-container">
+    <div class="nav-bar">
+        <div class="logo">
+            <div class="logo-icon">🛡️</div>
+            <div class="logo-text">FactGuard AI</div>
+        </div>
+        <div class="nav-links">
+            <span>Dashboard</span>
+            <span>Analytics</span>
+            <span>Documentation</span>
+            <span>Support</span>
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
-# ❌ Removed API key input field - ab user se nahi mangega
+# Hero Section
+st.markdown("""
+<div class="hero-section">
+    <div class="main-title">Precision Fact Checking<br>for Critical Documents</div>
+    <div class="tagline">AI-Powered Verification | Real-time Analysis | Comprehensive Reports</div>
+    <div class="subtitle">Powered by Groq's Llama 3.3 70B</div>
+</div>
+""", unsafe_allow_html=True)
 
-st.markdown('<div class="section-label">📄 Upload Document</div>', unsafe_allow_html=True)
+# Upload Section
+st.markdown("""
+<div class="upload-area">
+    <div class="upload-icon">📄</div>
+    <h3 style="margin-bottom: 0.5rem; color: #f1f5f9;">Upload Your Document</h3>
+    <p style="color: #94a3b8; margin-bottom: 1rem;">Supported format: PDF</p>
+</div>
+""", unsafe_allow_html=True)
+
 uploaded_file = st.file_uploader(
-    "Drop a PDF to fact-check",
+    "",
     type=["pdf"],
+    label_visibility="collapsed"
 )
 
 if uploaded_file:
-    st.success(f"✅ Loaded: **{uploaded_file.name}**")
+    st.markdown(f"""
+    <div class="success-message">
+        ✅ Successfully loaded: <strong>{uploaded_file.name}</strong>
+    </div>
+    """, unsafe_allow_html=True)
 
+# Analyze Button
 st.markdown("<br>", unsafe_allow_html=True)
-run = st.button("🔍 ANALYZE & FACT-CHECK")
+run = st.button("🔍 ANALYZE DOCUMENT", use_container_width=True, type="primary")
 
 if run:
     if not uploaded_file:
         st.error("⚠️ Please upload a PDF document first.")
     else:
-        with st.spinner("Extracting text from PDF..."):
+        with st.spinner(""):
+            st.markdown("""
+            <div class="loading-wrapper">
+                <div class="loading-spinner"></div>
+                <p style="color: #94a3b8;">Extracting text from PDF...</p>
+            </div>
+            """, unsafe_allow_html=True)
             doc_text = extract_text_from_pdf(uploaded_file)
 
         if len(doc_text.strip()) < 50:
             st.error("⚠️ Could not extract readable text. Try a text-based PDF.")
         else:
-            with st.spinner("🤖 Groq AI is analyzing claims..."):
+            with st.spinner(""):
+                st.markdown("""
+                <div class="loading-wrapper">
+                    <div class="loading-spinner"></div>
+                    <p style="color: #94a3b8;">🤖 Groq AI is analyzing claims...</p>
+                </div>
+                """, unsafe_allow_html=True)
                 claims = analyze_claims(doc_text, api_key)
 
             if claims and len(claims) > 0:
-                verified   = [c for c in claims if c.get("status") == "Verified"]
+                verified = [c for c in claims if c.get("status") == "Verified"]
                 inaccurate = [c for c in claims if c.get("status") == "Inaccurate"]
-                false_     = [c for c in claims if c.get("status") == "False"]
+                false_ = [c for c in claims if c.get("status") == "False"]
 
-                st.markdown('<div class="section-label">📊 Summary</div>', unsafe_allow_html=True)
-                col1, col2, col3, col4 = st.columns(4)
-                with col1:
-                    st.markdown(f"""<div class="stat-box">
-                        <div class="stat-number" style="color:#e8e8f0">{len(claims)}</div>
+                # Stats Section
+                st.markdown("""
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" style="color: #f1f5f9;">""" + str(len(claims)) + """</div>
                         <div class="stat-label">Total Claims</div>
-                    </div>""", unsafe_allow_html=True)
-                with col2:
-                    st.markdown(f"""<div class="stat-box">
-                        <div class="stat-number" style="color:#34d399">{len(verified)}</div>
-                        <div class="stat-label">Verified</div>
-                    </div>""", unsafe_allow_html=True)
-                with col3:
-                    st.markdown(f"""<div class="stat-box">
-                        <div class="stat-number" style="color:#fbbf24">{len(inaccurate)}</div>
-                        <div class="stat-label">Inaccurate</div>
-                    </div>""", unsafe_allow_html=True)
-                with col4:
-                    st.markdown(f"""<div class="stat-box">
-                        <div class="stat-number" style="color:#f87171">{len(false_)}</div>
-                        <div class="stat-label">False</div>
-                    </div>""", unsafe_allow_html=True)
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" style="color: #10b981;">""" + str(len(verified)) + """</div>
+                        <div class="stat-label">Verified ✓</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" style="color: #f59e0b;">""" + str(len(inaccurate)) + """</div>
+                        <div class="stat-label">Inaccurate ⚠</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" style="color: #ef4444;">""" + str(len(false_)) + """</div>
+                        <div class="stat-label">False ✗</div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
 
-                st.markdown("<br>", unsafe_allow_html=True)
-                st.markdown('<div class="section-label">🔎 Detailed Results</div>', unsafe_allow_html=True)
+                # Results Section
+                st.markdown('<div class="results-section">', unsafe_allow_html=True)
+                st.markdown('<div class="section-header">Detailed Analysis</div>', unsafe_allow_html=True)
 
-                for status_key, css_key, heading in [
-                    ("False", "false", "🚨 FALSE CLAIMS"),
-                    ("Inaccurate", "inaccurate", "⚠️ INACCURATE CLAIMS"),
-                    ("Verified", "verified", "✅ VERIFIED CLAIMS"),
-                ]:
-                    group = [c for c in claims if c.get("status") == status_key]
-                    if group:
-                        st.markdown(f"**{heading}** ({len(group)})")
-                        for item in group:
-                            st.markdown(f"""
-<div class="card card-{css_key}">
-    <span class="badge badge-{css_key}">{status_key}</span>
-    <div class="claim-text">"{item.get('claim', 'N/A')}"</div>
-    <div class="explanation">→ {item.get('explanation', 'No explanation')}</div>
-</div>""", unsafe_allow_html=True)
-                        st.markdown("<br>", unsafe_allow_html=True)
+                # False Claims First (most critical)
+                if false_:
+                    for item in false_:
+                        st.markdown(f"""
+                        <div class="claim-card false">
+                            <div class="claim-header">
+                                <span class="claim-badge badge-false">❌ FALSE</span>
+                            </div>
+                            <div class="claim-text">"{item.get('claim', 'N/A')}"</div>
+                            <div class="claim-explanation">→ {item.get('explanation', 'No explanation')}</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                # Inaccurate Claims
+                if inaccurate:
+                    for item in inaccurate:
+                        st.markdown(f"""
+                        <div class="claim-card inaccurate">
+                            <div class="claim-header">
+                                <span class="claim-badge badge-inaccurate">⚠ INACCURATE</span>
+                            </div>
+                            <div class="claim-text">"{item.get('claim', 'N/A')}"</div>
+                            <div class="claim-explanation">→ {item.get('explanation', 'No explanation')}</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                # Verified Claims
+                if verified:
+                    for item in verified:
+                        st.markdown(f"""
+                        <div class="claim-card verified">
+                            <div class="claim-header">
+                                <span class="claim-badge badge-verified">✓ VERIFIED</span>
+                            </div>
+                            <div class="claim-text">"{item.get('claim', 'N/A')}"</div>
+                            <div class="claim-explanation">→ {item.get('explanation', 'No explanation')}</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                st.markdown('</div>', unsafe_allow_html=True)
             else:
                 st.warning("⚠️ No valid claims were extracted from the document. Please try a different PDF or check the content format.")
 
-st.markdown('<div class="footer-text">FACTGUARD AI · POWERED BY GROQ · BUILT FOR COG CULTURE ASSESSMENT</div>', unsafe_allow_html=True)
+# Footer
+st.markdown("""
+<div class="footer">
+    <p>FactGuard AI · Powered by Groq's Llama 3.3 70B · Built for Precision & Reliability</p>
+    <p style="font-size: 0.7rem; margin-top: 0.5rem;">© 2024 FactGuard AI · All Rights Reserved</p>
+</div>
+""", unsafe_allow_html=True)
