@@ -16,7 +16,7 @@ st.set_page_config(
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -25,17 +25,14 @@ st.markdown("""
 }
 
 [data-testid="stAppViewContainer"] {
-    background: #0f0f1a;
-    background-image: 
-        linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
+    background: linear-gradient(135deg, #0a0f1c 0%, #0d1525 50%, #0a0f1c 100%);
+    background-attachment: fixed;
 }
 
 [data-testid="stHeader"] {
-    background: rgba(15, 15, 26, 0.95);
+    background: rgba(10, 15, 28, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    border-bottom: 1px solid rgba(255, 107, 107, 0.2);
 }
 
 /* Main container */
@@ -52,7 +49,7 @@ st.markdown("""
     align-items: center;
     padding: 1rem 0;
     margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+    border-bottom: 1px solid rgba(255, 107, 107, 0.15);
 }
 
 .logo {
@@ -63,13 +60,14 @@ st.markdown("""
 
 .logo-icon {
     font-size: 2rem;
+    filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
 }
 
 .logo-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 50%, #ff6b6b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.5px;
@@ -78,61 +76,65 @@ st.markdown("""
 .nav-links {
     display: flex;
     gap: 2rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
 }
 
 .nav-links span {
-    color: #94a3b8;
+    color: #8b9dc3;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: all 0.3s;
 }
 
 .nav-links span:hover {
-    color: #38bdf8;
+    color: #ff6b6b;
+    transform: translateY(-2px);
 }
 
 /* Hero section */
 .hero-section {
     text-align: center;
     padding: 3rem 1rem 4rem;
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.05) 0%, rgba(192, 132, 252, 0.05) 100%);
-    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.08) 0%, rgba(255, 142, 83, 0.08) 100%);
+    border-radius: 30px;
     margin-bottom: 3rem;
-    border: 1px solid rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .main-title {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 800;
     font-size: clamp(2.5rem, 7vw, 5rem);
     letter-spacing: -2px;
-    background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #c084fc 100%);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 50%, #ffd93d 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
 }
 
 .tagline {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.2rem;
-    color: #94a3b8;
+    color: #ffd93d;
     margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
 .subtitle {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.85rem;
-    color: #64748b;
-    letter-spacing: 1px;
+    color: #8b9dc3;
+    letter-spacing: 2px;
 }
 
 /* Upload area */
 .upload-area {
-    background: rgba(30, 41, 59, 0.5);
-    border: 2px dashed rgba(56, 189, 248, 0.3);
-    border-radius: 20px;
+    background: rgba(20, 28, 45, 0.6);
+    border: 2px dashed rgba(255, 107, 107, 0.3);
+    border-radius: 24px;
     padding: 2rem;
     text-align: center;
     transition: all 0.3s;
@@ -140,29 +142,34 @@ st.markdown("""
 }
 
 .upload-area:hover {
-    border-color: #38bdf8;
-    background: rgba(56, 189, 248, 0.05);
+    border-color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.08);
+    transform: translateY(-5px);
 }
 
 .upload-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
+    filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.3));
 }
 
 /* Button styling */
 .analyze-btn {
-    background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
     color: white;
     border: none;
     padding: 1rem 2rem;
     font-size: 1rem;
-    font-weight: 600;
-    border-radius: 12px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 50px;
     width: 100%;
     cursor: pointer;
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .analyze-btn::before {
@@ -172,7 +179,7 @@ st.markdown("""
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     transition: left 0.5s;
 }
 
@@ -181,8 +188,8 @@ st.markdown("""
 }
 
 .analyze-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
 }
 
 /* Stats grid */
@@ -194,35 +201,35 @@ st.markdown("""
 }
 
 .stat-card {
-    background: rgba(30, 41, 59, 0.6);
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 142, 83, 0.05));
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(56, 189, 248, 0.15);
-    border-radius: 16px;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    border-radius: 20px;
     padding: 1.5rem;
     text-align: center;
     transition: all 0.3s;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(56, 189, 248, 0.4);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    transform: translateY(-8px);
+    border-color: #ff6b6b;
+    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2);
 }
 
 .stat-number {
-    font-family: 'Inter', sans-serif;
-    font-size: 2.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
 }
 
 .stat-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    color: #94a3b8;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    color: #ffd93d;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 500;
+    letter-spacing: 2px;
+    font-weight: 600;
 }
 
 /* Results section */
@@ -231,48 +238,53 @@ st.markdown("""
 }
 
 .section-header {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    color: #ffd93d;
 }
 
 .section-header::before {
     content: '';
-    width: 4px;
-    height: 24px;
-    background: linear-gradient(135deg, #38bdf8, #818cf8);
-    border-radius: 2px;
+    width: 5px;
+    height: 30px;
+    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    border-radius: 3px;
 }
 
 /* Claim cards */
 .claim-card {
-    background: rgba(30, 41, 59, 0.4);
-    border-radius: 12px;
+    background: rgba(20, 28, 45, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
     padding: 1.5rem;
     margin-bottom: 1rem;
-    border-left: 4px solid;
+    border-left: 5px solid;
     transition: all 0.3s;
 }
 
 .claim-card:hover {
-    transform: translateX(5px);
-    background: rgba(30, 41, 59, 0.6);
+    transform: translateX(8px);
+    background: rgba(255, 107, 107, 0.1);
 }
 
 .claim-card.verified {
-    border-left-color: #10b981;
+    border-left-color: #4ade80;
+    box-shadow: 0 5px 20px rgba(74, 222, 128, 0.1);
 }
 
 .claim-card.inaccurate {
-    border-left-color: #f59e0b;
+    border-left-color: #fbbf24;
+    box-shadow: 0 5px 20px rgba(251, 191, 36, 0.1);
 }
 
 .claim-card.false {
     border-left-color: #ef4444;
+    box-shadow: 0 5px 20px rgba(239, 68, 68, 0.1);
 }
 
 .claim-header {
@@ -283,24 +295,25 @@ st.markdown("""
 }
 
 .claim-badge {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.7rem;
     font-weight: 700;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .badge-verified {
-    background: rgba(16, 185, 129, 0.2);
-    color: #10b981;
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
 .badge-inaccurate {
-    background: rgba(245, 158, 11, 0.2);
-    color: #f59e0b;
-    border: 1px solid rgba(245, 158, 11, 0.3);
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
 }
 
 .badge-false {
@@ -310,21 +323,21 @@ st.markdown("""
 }
 
 .claim-text {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1rem;
     font-weight: 500;
-    color: #f1f5f9;
+    color: #e2e8f0;
     margin-bottom: 0.75rem;
     line-height: 1.5;
 }
 
 .claim-explanation {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.85rem;
-    color: #94a3b8;
+    color: #8b9dc3;
     line-height: 1.6;
     padding-top: 0.75rem;
-    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    border-top: 1px solid rgba(255, 107, 107, 0.1);
 }
 
 /* Loading animation */
@@ -334,12 +347,13 @@ st.markdown("""
 }
 
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 3px solid rgba(56, 189, 248, 0.2);
-    border-top-color: #38bdf8;
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(255, 107, 107, 0.2);
+    border-top-color: #ff6b6b;
+    border-right-color: #ff8e53;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 0.8s linear infinite;
     margin: 0 auto 1rem;
 }
 
@@ -347,15 +361,21 @@ st.markdown("""
     to { transform: rotate(360deg); }
 }
 
+.loading-wrapper p {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #ffd93d;
+    font-size: 0.9rem;
+}
+
 /* Footer */
 .footer {
     margin-top: 4rem;
     padding: 2rem;
     text-align: center;
-    border-top: 1px solid rgba(56, 189, 248, 0.1);
-    font-family: 'Inter', sans-serif;
+    border-top: 1px solid rgba(255, 107, 107, 0.15);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.8rem;
-    color: #64748b;
+    color: #5a6e8a;
 }
 
 /* Responsive */
@@ -369,7 +389,7 @@ st.markdown("""
     }
 }
 
-/* Custom file uploader */
+/* Custom file uploader styling */
 [data-testid="stFileUploader"] {
     background: transparent;
 }
@@ -380,19 +400,36 @@ st.markdown("""
 
 /* Success message */
 .success-message {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(74, 222, 128, 0.05));
+    border: 1px solid rgba(74, 222, 128, 0.3);
     border-radius: 12px;
     padding: 0.75rem 1rem;
-    color: #10b981;
+    color: #4ade80;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.9rem;
     margin-top: 1rem;
+    font-weight: 500;
+}
+
+/* Error message styling */
+[data-testid="stAlert"] {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 12px;
+    color: #ef4444;
+}
+
+/* Warning message styling */
+[data-testid="stAlert"]:has(> div:first-child[data-testid="stMarkdown"]:contains("⚠")) {
+    background: rgba(251, 191, 36, 0.1);
+    border-color: rgba(251, 191, 36, 0.3);
+    color: #fbbf24;
 }
 </style>
 """, unsafe_allow_html=True)
 
 
-# ── Helpers (same as before) ───────────────────────────────────────────────────
+# ── Helpers (same functionality) ───────────────────────────────────────────────────
 
 def extract_text_from_pdf(uploaded_file) -> str:
     data = uploaded_file.read()
@@ -502,14 +539,14 @@ st.markdown("""
 <div class="main-container">
     <div class="nav-bar">
         <div class="logo">
-            <div class="logo-icon">🛡️</div>
+            <div class="logo-icon">⚡</div>
             <div class="logo-text">FactGuard AI</div>
         </div>
         <div class="nav-links">
-            <span>Dashboard</span>
-            <span>Analytics</span>
-            <span>Documentation</span>
-            <span>Support</span>
+            <span>🏠 Dashboard</span>
+            <span>📊 Analytics</span>
+            <span>📚 Docs</span>
+            <span>💬 Support</span>
         </div>
     </div>
 </div>
@@ -518,8 +555,8 @@ st.markdown("""
 # Hero Section
 st.markdown("""
 <div class="hero-section">
-    <div class="main-title">Precision Fact Checking<br>for Critical Documents</div>
-    <div class="tagline">AI-Powered Verification | Real-time Analysis | Comprehensive Reports</div>
+    <div class="main-title">Truth Decoded.<br>Facts Verified.</div>
+    <div class="tagline">⚡ Lightning-fast AI Fact Checking | 99.9% Accuracy</div>
     <div class="subtitle">Powered by Groq's Llama 3.3 70B</div>
 </div>
 """, unsafe_allow_html=True)
@@ -527,9 +564,9 @@ st.markdown("""
 # Upload Section
 st.markdown("""
 <div class="upload-area">
-    <div class="upload-icon">📄</div>
-    <h3 style="margin-bottom: 0.5rem; color: #f1f5f9;">Upload Your Document</h3>
-    <p style="color: #94a3b8; margin-bottom: 1rem;">Supported format: PDF</p>
+    <div class="upload-icon">📄✨</div>
+    <h3 style="margin-bottom: 0.5rem; color: #ffd93d; font-family: 'Poppins', sans-serif;">Drop Your Document Here</h3>
+    <p style="color: #8b9dc3; margin-bottom: 1rem; font-family: 'Space Grotesk', sans-serif;">Supported format: PDF</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -542,13 +579,13 @@ uploaded_file = st.file_uploader(
 if uploaded_file:
     st.markdown(f"""
     <div class="success-message">
-        ✅ Successfully loaded: <strong>{uploaded_file.name}</strong>
+        ✅ Ready for analysis: <strong>{uploaded_file.name}</strong>
     </div>
     """, unsafe_allow_html=True)
 
 # Analyze Button
 st.markdown("<br>", unsafe_allow_html=True)
-run = st.button("🔍 ANALYZE DOCUMENT", use_container_width=True, type="primary")
+run = st.button("🚀 START VERIFICATION", use_container_width=True, type="primary")
 
 if run:
     if not uploaded_file:
@@ -558,7 +595,7 @@ if run:
             st.markdown("""
             <div class="loading-wrapper">
                 <div class="loading-spinner"></div>
-                <p style="color: #94a3b8;">Extracting text from PDF...</p>
+                <p>📄 Extracting text from PDF...</p>
             </div>
             """, unsafe_allow_html=True)
             doc_text = extract_text_from_pdf(uploaded_file)
@@ -570,7 +607,7 @@ if run:
                 st.markdown("""
                 <div class="loading-wrapper">
                     <div class="loading-spinner"></div>
-                    <p style="color: #94a3b8;">🤖 Groq AI is analyzing claims...</p>
+                    <p>🤖 AI is analyzing claims with Groq...</p>
                 </div>
                 """, unsafe_allow_html=True)
                 claims = analyze_claims(doc_text, api_key)
@@ -581,22 +618,22 @@ if run:
                 false_ = [c for c in claims if c.get("status") == "False"]
 
                 # Stats Section
-                st.markdown("""
+                st.markdown(f"""
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number" style="color: #f1f5f9;">""" + str(len(claims)) + """</div>
+                        <div class="stat-number" style="color: #e2e8f0;">{len(claims)}</div>
                         <div class="stat-label">Total Claims</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number" style="color: #10b981;">""" + str(len(verified)) + """</div>
+                        <div class="stat-number" style="color: #4ade80;">{len(verified)}</div>
                         <div class="stat-label">Verified ✓</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number" style="color: #f59e0b;">""" + str(len(inaccurate)) + """</div>
+                        <div class="stat-number" style="color: #fbbf24;">{len(inaccurate)}</div>
                         <div class="stat-label">Inaccurate ⚠</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number" style="color: #ef4444;">""" + str(len(false_)) + """</div>
+                        <div class="stat-number" style="color: #ef4444;">{len(false_)}</div>
                         <div class="stat-label">False ✗</div>
                     </div>
                 </div>
@@ -604,7 +641,7 @@ if run:
 
                 # Results Section
                 st.markdown('<div class="results-section">', unsafe_allow_html=True)
-                st.markdown('<div class="section-header">Detailed Analysis</div>', unsafe_allow_html=True)
+                st.markdown('<div class="section-header">🔍 Detailed Verification Report</div>', unsafe_allow_html=True)
 
                 # False Claims First (most critical)
                 if false_:
@@ -612,10 +649,10 @@ if run:
                         st.markdown(f"""
                         <div class="claim-card false">
                             <div class="claim-header">
-                                <span class="claim-badge badge-false">❌ FALSE</span>
+                                <span class="claim-badge badge-false">🚨 FALSE CLAIM</span>
                             </div>
                             <div class="claim-text">"{item.get('claim', 'N/A')}"</div>
-                            <div class="claim-explanation">→ {item.get('explanation', 'No explanation')}</div>
+                            <div class="claim-explanation">❌ {item.get('explanation', 'No explanation')}</div>
                         </div>
                         """, unsafe_allow_html=True)
 
@@ -628,7 +665,7 @@ if run:
                                 <span class="claim-badge badge-inaccurate">⚠ INACCURATE</span>
                             </div>
                             <div class="claim-text">"{item.get('claim', 'N/A')}"</div>
-                            <div class="claim-explanation">→ {item.get('explanation', 'No explanation')}</div>
+                            <div class="claim-explanation">⚠️ {item.get('explanation', 'No explanation')}</div>
                         </div>
                         """, unsafe_allow_html=True)
 
@@ -641,7 +678,7 @@ if run:
                                 <span class="claim-badge badge-verified">✓ VERIFIED</span>
                             </div>
                             <div class="claim-text">"{item.get('claim', 'N/A')}"</div>
-                            <div class="claim-explanation">→ {item.get('explanation', 'No explanation')}</div>
+                            <div class="claim-explanation">✅ {item.get('explanation', 'No explanation')}</div>
                         </div>
                         """, unsafe_allow_html=True)
 
@@ -652,7 +689,7 @@ if run:
 # Footer
 st.markdown("""
 <div class="footer">
-    <p>FactGuard AI · Powered by Groq's Llama 3.3 70B · Built for Precision & Reliability</p>
-    <p style="font-size: 0.7rem; margin-top: 0.5rem;">© 2024 FactGuard AI · All Rights Reserved</p>
+    <p>⚡ FactGuard AI · Built with Groq's Llama 3.3 70B · Accuracy First</p>
+    <p style="font-size: 0.7rem; margin-top: 0.5rem;">© 2024 FactGuard AI · Protecting Truth in the Digital Age</p>
 </div>
 """, unsafe_allow_html=True)
